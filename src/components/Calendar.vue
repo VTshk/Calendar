@@ -6,7 +6,7 @@
       <div class="table">
         <div class="timePeriods">
           <div class="period" v-for="(time, i) of 23" :key="i">
-            <span>{{i > 8 ? ++i: '0' + ++i}}.00</span>
+            <span>{{i > 8 ? ++i : '0' + ++i}}:00</span>
             <div class="underline"></div>
           </div>
         </div>
@@ -24,7 +24,7 @@
               <div class="noteText">
                 <strong>{{note.title}}</strong>
                 <span :class="{'row': smallHeight(note)}">
-                  {{getPeriod(note.startDate, note.endDate)}}
+                  {{getPeriod(note)}}
                 </span>
               </div>
             </drag>
@@ -93,8 +93,8 @@ export default {
         })
       }
     },
-    getPeriod (start, end) {
-      return format(start, 'HH:mm') + '-' + format(end, 'HH:mm')
+    getPeriod (note) {
+      return format(note.startDate, 'HH:mm') + '-' + format(note.endDate, 'HH:mm')
     },
     smallHeight (note) {
       return note.endDate - note.startDate === 1800000
