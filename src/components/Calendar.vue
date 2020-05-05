@@ -20,7 +20,7 @@
               class="note"
               v-for="note in cell.notes" :key="note.startDate"
               :transfer-data="{note}"
-              :style="{height: calculateHeightNote(note)}">
+              :style="inlineStyleNote(note)">
               <div class="noteText">
                 <strong>{{note.title}}</strong>
                 <span :class="{'row': smallHeight(note)}">
@@ -99,8 +99,10 @@ export default {
     smallHeight (note) {
       return note.endDate - note.startDate === 1800000
     },
-    calculateHeightNote (note) {
-      return (note.endDate - note.startDate) / 3600000 * 50.4 + 'px'
+    inlineStyleNote (note) {
+      return {
+        height: (note.endDate - note.startDate) / 3600000 * 50.4 + 'px'
+      }
     }
   }
 }
