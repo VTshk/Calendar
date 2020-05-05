@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
 import { getTime } from 'date-fns'
-import notes from '../mockData.js'
+import mockNotes from '../mockData.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    notes: notes
+    notes: mockNotes
   },
   mutations: {
     setNotes (state, newNotes) {

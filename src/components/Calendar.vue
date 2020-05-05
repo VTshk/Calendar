@@ -20,10 +20,10 @@
               class="note"
               v-for="note in cell.notes" :key="note.startDate"
               :transfer-data="{note}"
-              :style="{height: (note.endDate - note.startDate) / 3600000 * 50.4 + 'px'}">
+              :style="{height: calculateHeightNote(note)}">
               <div class="noteText">
                 <strong>{{note.title}}</strong>
-                <span :class="{'row': note.endDate - note.startDate === 1800000}">
+                <span :class="{'row': smallHeight(note)}">
                   {{getPeriod(note.startDate, note.endDate)}}
                 </span>
               </div>
@@ -74,6 +74,7 @@ export default {
       }
       return columns
     },
+
     notes () {
       return this.$store.getters.getNotes()
     }
@@ -94,6 +95,12 @@ export default {
     },
     getPeriod (start, end) {
       return format(start, 'HH:mm') + '-' + format(end, 'HH:mm')
+    },
+    smallHeight (note) {
+      return note.endDate - note.startDate === 1800000
+    },
+    calculateHeightNote (note) {
+      return (note.endDate - note.startDate) / 3600000 * 50.4 + 'px'
     }
   }
 }
@@ -102,13 +109,11 @@ export default {
 <style scoped lang="sass">
 .calendar
   margin: 0 auto
-  overflow-x: auto
   width: 90vw
   .table
     display: flex
     height: 80vh
     overflow-x: hidden
-    overflow-y: auto
     .timePeriods
       margin-top: 1px
       .period
